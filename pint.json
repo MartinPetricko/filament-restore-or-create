@@ -1,14 +1,11 @@
 {
-    "preset": "laravel",
+    "preset": "psr12",
     "rules": {
-        "blank_line_before_statement": true,
+        "declare_strict_types": true,
+        "explicit_string_variable": true,
+        "not_operator_with_successor_space": false,
         "concat_space": {
             "spacing": "one"
-        },
-        "method_argument_space": true,
-        "single_trait_insert_per_statement": true,
-        "types_spaces": {
-            "space": "single"
         }
     }
 }
