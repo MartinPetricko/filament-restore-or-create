@@ -1,10 +1,12 @@
 {
     "name": "martinpetricko/filament-restore-or-create",
-    "description": "This is my package filament-restore-or-create",
+    "description": "FilamentPHP package that adds ability to check for similar deleted records and restore them instead of creating new ones.",
     "keywords": [
         "MartinPetricko",
         "laravel",
-        "filament-restore-or-create"
+        "filament",
+        "restore",
+        "create"
     ],
     "homepage": "https://github.com/martinpetricko/filament-restore-or-create",
     "support": {
@@ -61,12 +63,9 @@
         "laravel": {
             "providers": [
                 "MartinPetricko\\FilamentRestoreOrCreate\\FilamentRestoreOrCreateServiceProvider"
-            ],
-            "aliases": {
-                "FilamentRestoreOrCreate": "MartinPetricko\\FilamentRestoreOrCreate\\Facades\\FilamentRestoreOrCreate"
-            }
+            ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
