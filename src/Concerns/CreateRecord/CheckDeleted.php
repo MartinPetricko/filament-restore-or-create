@@ -55,14 +55,9 @@ trait CheckDeleted
 
         $checkDeletedData = array_filter(Arr::only($data, $this->checkDeletedAttributes()));
 
-        $query = $resource::getEloquentQuery()
-            ->where(fn (Builder $query) => $query->orWhere($checkDeletedData));
-
-        if (method_exists($query, 'onlyTrashed')) {
-            $query->onlyTrashed();
-        }
-
-        return $query
+        return $resource::getEloquentQuery()
+            ->where(fn (Builder $query) => $query->orWhere($checkDeletedData))
+            ->onlyTrashed()
             ->latest()
             ->first();
     }
@@ -76,36 +71,29 @@ trait CheckDeleted
 
         $this->restoreDeletedNotified = true;
 
-        $this->mountAction('check-deleted', ['deletedModel' => $deletedModel]);
+        $this->mountAction('checkDeleted', ['deletedModel' => $deletedModel]);
 
         $this->halt();
     }
 
-    protected function getFormActions(): array
-    {
-        return array_merge(parent::getFormActions(), [
-            $this->getCheckDeletedFormAction(),
-        ]);
-    }
-
-    protected function getCheckDeletedFormAction(): Action
+    protected function checkDeletedAction(): Action
     {
         return CheckDeletedAction::make()
-            ->infolist($this->getRestoreInfolist())
+            ->schema($this->getRestoreSchema())
             ->restoreRedirectUrl(fn (Model $record) => $this->getRestoreRedirectUrl($record))
             ->successNotification($this->getRestoredNotification());
     }
 
-    protected function getRestoreInfolist(): array
+    protected function getRestoreSchema(): array
     {
         return [
             KeyValueEntry::make('deletedModel')
                 ->hiddenLabel()
-                ->getStateUsing(function (Model $record) {
+                ->state(function (Model $record) {
                     return collect($record->toArray())
                         ->only($this->showDeletedAttributes())
                         ->mapWithKeys(fn ($value, $key) => [Str::headline($key) => $value]);
-                })
+                }),
         ];
     }
 
