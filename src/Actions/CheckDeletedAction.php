@@ -16,7 +16,7 @@ class CheckDeletedAction extends Action
 
     public static function getDefaultName(): ?string
     {
-        return 'check-deleted';
+        return 'checkDeleted';
     }
 
     protected function setUp(): void
@@ -24,8 +24,7 @@ class CheckDeletedAction extends Action
         parent::setUp();
 
         $this
-            ->record(fn (array $arguments) => $arguments['deletedModel'])
-            ->view('filament-restore-or-create::actions.hidden')
+            ->record(fn (array $arguments) => $arguments['deletedModel'] ?? null)
             ->color('warning')
             ->requiresConfirmation()
             ->modalHeading(__('filament-restore-or-create::actions.check_deleted.modal_heading'))

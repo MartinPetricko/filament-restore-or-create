@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "filament/filament": "^3.3",
+        "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15"
     },
     "require-dev": {
@@ -66,6 +66,6 @@
             ]
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
