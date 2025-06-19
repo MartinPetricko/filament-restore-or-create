@@ -113,22 +113,13 @@ protected function getRestoreRedirectUrl(Model $record): string
 
 ## Advanced Integration
 
-If you override `beforeCreate` or `getFormActions`, ensure the restore behavior is still called:
+If you override `beforeCreate`, ensure the restore behavior is still called:
 
 ```php
 class CreateUser extends CreateRecord
 {
     use CheckDeleted {
         beforeCreate as checkDeletedBeforeCreate;
-    }
-    
-    protected function getFormActions(): array
-    {
-        return [
-            // Custom form actions
-            
-            $this->getCheckDeletedFormAction(),
-        ];
     }
 
     protected function beforeCreate(): void

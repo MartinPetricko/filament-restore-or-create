@@ -7,7 +7,6 @@ parameters:
     level: 10
     paths:
         - src
-        - resources/views
 
     tmpDir: build/phpstan
 

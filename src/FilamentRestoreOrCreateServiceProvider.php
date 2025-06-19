@@ -14,8 +14,7 @@ class FilamentRestoreOrCreateServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name(static::$name)
-            ->hasTranslations()
-            ->hasViews();
+            ->hasTranslations();
     }
 
     public function packageRegistered(): void
